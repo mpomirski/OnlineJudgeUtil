@@ -34,8 +34,8 @@ def createFiles(inputFile, outputFileName):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("filein", help="plik wejsciowy", metavar="<inputFile>")
-    parser.add_argument("fileout", help="nazwa pliku wyjsciowego", metavar="<outputFileName>")
+    parser.add_argument("filein", help="input file", metavar="<inputFile>")
+    parser.add_argument("fileout", help="output file name", metavar="<outputFileName>")
     arguments = parser.parse_args()
 
     createFiles(arguments.filein, arguments.fileout)

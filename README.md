@@ -1,15 +1,16 @@
-# Bajton-Helper
-Tworzy archiwum zip z potrzebnymi plikami  
-Sposób użycia:  
-`python makeFiles.py <plik_wejściowy> <nazwa_pliku_wyjściowego>`  
-Plik wejściowy powinien być w formacie: 
+# Easy test file creation for QiangdaoU's OnlineJudge
+https://github.com/QingdaoU/OnlineJudge
+Creates a zip archive with the .in .out files 
+Usage:  
+`python makeFiles.py <input_file> <output_file_name>`  
+Input file should be formatted as following: 
 ```
 test1
 ::
-wynik1
+result1
 ::
 test2
 ::
-wynik2
+result2
 ```
-zapisany jako `.txt`
+and saved in `.txt` format

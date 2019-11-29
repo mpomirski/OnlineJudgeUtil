@@ -11,4 +11,5 @@ wynik1
 test2
 ::
 wynik2
-``` zapisany jako `.txt`
+```
+zapisany jako `.txt`

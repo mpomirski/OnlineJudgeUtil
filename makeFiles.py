@@ -1,4 +1,4 @@
-import sys, argparse, os, shutil
+import argparse, os, shutil
 
 def createFiles(inputFile, outputFileName):
     cwd = os.getcwd()

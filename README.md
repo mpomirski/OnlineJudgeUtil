@@ -1,5 +1,5 @@
 # Easy test file creation for QiangdaoU's OnlineJudge
-https://github.com/QingdaoU/OnlineJudge
+https://github.com/QingdaoU/OnlineJudge  
 Creates a zip archive with the .in .out files 
 Usage:  
 `python makeFiles.py <input_file> <output_file_name>`  

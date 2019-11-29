@@ -1,6 +1,6 @@
 import sys, argparse, os, shutil
 
-def createFiles(inputFile):
+def createFiles(inputFile, outputFileName):
     cwd = os.getcwd()
     org_path = os.path.join(cwd, "output")
     if not os.path.exists(org_path):
@@ -29,17 +29,16 @@ def createFiles(inputFile):
         with open(os.path.join(org_path, filename), "w+") as outFile:
             outFile.write("\n".join(outputArg))
 
-    shutil.make_archive("output", "zip", org_path)
+    shutil.make_archive(outputFileName, "zip", org_path)
     shutil.rmtree(org_path)
 
 def main():
-    inputFile = ""
-    outputFile = ""
     parser = argparse.ArgumentParser()
-    parser.add_argument("file", help="plik wejsciowy", metavar="<inputFile>")
+    parser.add_argument("filein", help="plik wejsciowy", metavar="<inputFile>")
+    parser.add_argument("fileout", help="nazwa pliku wyjsciowego", metavar="<outputFileName>")
     arguments = parser.parse_args()
 
-    createFiles(arguments.file)
+    createFiles(arguments.filein, arguments.fileout)
 
 if __name__ == "__main__":
     main()

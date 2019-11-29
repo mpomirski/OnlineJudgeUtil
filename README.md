@@ -1,7 +1,7 @@
 # Bajton-Helper
-Tworzy output.zip z potrzebnymi plikami  
+Tworzy archiwum zip z potrzebnymi plikami  
 Sposób użycia:  
-`python makeFiles.py <plik_wejściowy>`  
+`python makeFiles.py <plik_wejściowy> <nazwa_pliku_wyjściowego`  
 Plik wejściowy powinien być w formacie: 
 ```
 test1

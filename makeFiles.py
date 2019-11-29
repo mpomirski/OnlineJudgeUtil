@@ -1,4 +1,4 @@
-import sys, getopt, os, shutil
+import sys, argparse, os, shutil
 
 def createFiles(inputFile):
     cwd = os.getcwd()
@@ -10,41 +10,36 @@ def createFiles(inputFile):
         ins = []
         outs = []
         mainFile = mainFile.read()
-        mainFile = mainFile.split(" : ")
-        mainFile = [sub.split(", ") for sub in mainFile]
-        ins = mainFile[0]
-        outs = mainFile[1]
+        mainFile = mainFile.split('::')
+        mainFile = [sub.split("\n") for sub in mainFile]
+        mainFile = [(list(filter(None, sub))) for sub in mainFile]
+        for i in range(0, len(mainFile)):
+            if i % 2 == 0:
+                ins.append(mainFile[i])
+            else:
+                outs.append(mainFile[i])
 
     for i, inputArg in enumerate(ins):
         filename = str(i+1) + ".in"
         with open(os.path.join(org_path, filename), "w+") as inFile:
-            inFile.write(inputArg)
+            inFile.write("\n".join(inputArg))
 
     for i, outputArg in enumerate(outs):
         filename = str(i+1) + ".out"
         with open(os.path.join(org_path, filename), "w+") as outFile:
-            outFile.write(outputArg)
+            outFile.write("\n".join(outputArg))
 
     shutil.make_archive("output", "zip", org_path)
     shutil.rmtree(org_path)
 
-def main(argv):
+def main():
     inputFile = ""
     outputFile = ""
-    try:
-        opts, args = getopt.getopt(argv, "hi:", ["ifile="])
-    except getopt.GetoptError:
-        print("makeFiles.py -i <plik_wejsciowy>")
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == "-h":
-            print("Zamienia plik wzorcowy na pliki .in, .out, spakowane do formatu .zip")
-            print("Plik wzorcowy powinien być w formacie 'test1, test2, test3 : wynik1, wynik2, wynik3', zapisany jako .txt")
-            print ("Sposób używa: makeFiles.py -i <plik_wejsciowy>")
-            sys.exit(2)
-        elif opt in ("-i", "--ifile"):
-            inputfile = arg
-        createFiles(inputfile)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file", help="plik wejsciowy", metavar="<inputFile>")
+    arguments = parser.parse_args()
+
+    createFiles(arguments.file)
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()

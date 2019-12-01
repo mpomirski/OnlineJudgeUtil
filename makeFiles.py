@@ -1,6 +1,18 @@
 import argparse, os, shutil
 
-def createFiles(inputFile):
+def showTests(t):
+    num = t.count('::')
+    tem = t.split('\n\n')
+    t = []
+    for i in tem:
+        t.append(i.split('\n'))
+    col_width = max(len(word) for row in t for word in row) + 2
+    for idi, row in enumerate(t):
+        print ("Test " + str(idi) + ": "+ "".join(word.ljust(col_width) for word in row))
+    print("Total number of tests: " + str(num))
+
+def createFiles(args):
+    inputFile = args.filein
     cwd = os.getcwd()
     org_path = os.path.join(cwd, "output")
     outputFileName = inputFile.split(".")[0]
@@ -11,6 +23,8 @@ def createFiles(inputFile):
         ins = []
         outs = []
         mainFile = mainFile.read()
+        if args.show:
+            showTests(mainFile)
         cpMain = mainFile
         mainFile = []
         for sub in cpMain.split('\n\n'):
@@ -36,13 +50,16 @@ def createFiles(inputFile):
 
     shutil.make_archive(outputFileName, "zip", org_path)
     shutil.rmtree(org_path)
+    print("Finished!")
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("filein", help="input file", metavar="<inputFile>")
+    parser.add_argument("--show", help="show test cases",
+                    action="store_true")
     arguments = parser.parse_args()
 
-    createFiles(arguments.filein)
+    createFiles(arguments)
 
 if __name__ == "__main__":
     main()

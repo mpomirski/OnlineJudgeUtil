@@ -6,6 +6,13 @@ Creates a zip archive with the .in .out tests files for [this judge](https://git
 
 `python makeFiles.py [-h] [-o <outputFile>] [-s] <inputFile>`
 
+ | Optional arguments: | Discription:           |
+ |---------------------|-----------------------:|
+ | -h, --help          | show this help message |
+ | -o, --fileout       | output file            |
+ | -s, --show          | show test cases        |
+
+
 Input file should be in `.txt` format and be formatted as following: 
 
 ```

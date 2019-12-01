@@ -15,7 +15,10 @@ def createFiles(args):
     inputFile = args.filein
     cwd = os.getcwd()
     org_path = os.path.join(cwd, "output")
-    outputFileName = inputFile.split(".")[0]
+    if args.fileout == None:
+        outputFileName = inputFile.split(".")[0]
+    else:
+        outputFileName = args.fileout
     if not os.path.exists(org_path):
         os.mkdir(org_path)
     
@@ -50,13 +53,14 @@ def createFiles(args):
 
     shutil.make_archive(outputFileName, "zip", org_path)
     shutil.rmtree(org_path)
-    print("Finished!")
+    
+    print("Finished building " + outputFileName + ".zip")
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("filein", help="input file", metavar="<inputFile>")
-    parser.add_argument("--show", help="show test cases",
-                    action="store_true")
+    parser.add_argument("-o", "--fileout", help="output file", metavar="<outputFile>")
+    parser.add_argument("-s", "--show", help="show test cases", action="store_true")
     arguments = parser.parse_args()
 
     createFiles(arguments)
